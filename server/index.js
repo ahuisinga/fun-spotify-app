@@ -1,3 +1,10 @@
+require("dotenv").config();
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
+const redirect_uri =
+    process.env.REDIRECT_URI || "http://localhost:8888/callback";
+const FRONTEND_URI = process.env.FRONTEND_URI || "http://localhost:5173";
+
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -5,11 +12,6 @@ const querystring = require("node:querystring");
 const request = require("request");
 
 app.use(cors());
-
-const client_id = "424f0f59b7a34503a24321669589c6b5";
-const client_secret = "2f705170a4754a3984f6a01cdd377b20";
-const redirect_uri = "http://localhost:8888/callback";
-const FRONTEND_URI = "http://localhost:5173";
 
 const generateRandomString = (length) => {
     const possible =
@@ -126,4 +128,5 @@ app.get("/logout", function (req, res) {
 
 app.listen(8888, () => {
     console.log("server listening on port 8888");
+    console.log("client id: " + client_id);
 });
